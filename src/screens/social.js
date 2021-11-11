@@ -5,6 +5,7 @@ import "../styles/social.css";
 import Container from "@mui/material/Container";
 import Swap from "./iconList";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 class Social extends React.Component {
   render() {
@@ -13,7 +14,19 @@ class Social extends React.Component {
         <div className="header">
           <Container maxWidth="fixed">
             <img src={icon} alt="Logo" className="welcome" />
-            <Swap />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-around",
+                p: 1,
+                m: 1,
+                pt: 4,
+                bgcolor: "transparent",
+              }}
+            >
+              <Swap />
+            </Box>
+
             <div className="btn-next">
               <Button
                 onClick={() => {
