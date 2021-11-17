@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { withRouter } from "react-router";
 import "../styles/social.css";
 import { styled } from "@mui/material/styles";
@@ -19,9 +19,63 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 
-//falta setear en el state para luego guardarlo en localstorage y generar el codigo QR
 
+
+//Start Modal
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 250,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+function BasicModal() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpenModal = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  return (
+      <div>
+        <div className="btn-create">
+          <Button
+              onClick={handleOpenModal}
+              variant="contained"
+          >
+            Generar codigo QR
+          </Button>
+        </div>
+        <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+             Compartelo con tus amigos:
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            </Typography>
+          </Box>
+        </Modal>
+      </div>
+  );
+}
+
+//Finish Modal
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -35,6 +89,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function FormDialog() {
   const [open, setOpen] = React.useState(false);
+  const [social, setSocial] = useState([]);
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -44,15 +100,27 @@ function FormDialog() {
     setOpen(false);
   };
 
+  const handleSocial = (idSocial) => {
+    setSocial(idSocial);
+    console.log("Set " + idSocial);
+
+    handleClickOpen();
+  };
+
+  const handleSumbit = () => {
+    console.log("Sumbit " + social);
+    handleClose();
+  };
+
   return (
     <>
-      <div className="header">
-        <span>Oprime el icono y guarda el URL</span>
+
+        <span className="title">Oprime el icono y guarda el URL</span>
         <Container sx={{ flexGrow: 1, justifyContent: "center" }}>
           {/* Row one */}
           <Grid container spacing={1} columns={16} justifyContent="center">
             {/* Facebook */}
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={() => handleSocial('Facebook')}>
               <Grid
                 item
                 xs={8}
@@ -67,29 +135,8 @@ function FormDialog() {
               </Grid>
             </Button>
 
-            <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>Agregar URL Facebook</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  Ingresa el URL de tu red social: (Ej:
-                  https://www.facebook.com/profile.php?id=123456789)
-                </DialogContentText>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="url"
-                  label="URL"
-                  type="url"
-                  fullWidth
-                  variant="standard"
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose}>Cancelar</Button>
-                <Button onClick={handleClose}>Agregar</Button>
-              </DialogActions>
-            </Dialog>
-            <Button variant="outlined" onClick={handleClickOpen}>
+
+            <Button variant="outlined" onClick={() => handleSocial('Whatsapp')}>
               {/* Whatsapp */}
               <Grid
                 item
@@ -105,34 +152,13 @@ function FormDialog() {
               </Grid>
             </Button>
 
-            <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>Agregar URL Whatsapp</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  Ingresa el URL de tu red social: (Ej:
-                  https://wa.me/1XXXXXXXXXX)
-                </DialogContentText>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="url"
-                  label="URL"
-                  type="url"
-                  fullWidth
-                  variant="standard"
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose}>Cancelar</Button>
-                <Button onClick={handleClose}>Agregar</Button>
-              </DialogActions>
-            </Dialog>
+
           </Grid>
 
           {/* Row two */}
           <Grid container spacing={1} columns={16} justifyContent="center">
             {/* Instagram */}
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={() => handleSocial('Instagram')}>
               <Grid
                 item
                 xs={8}
@@ -147,29 +173,8 @@ function FormDialog() {
               </Grid>
             </Button>
 
-            <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>Agregar URL Instagram</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  Ingresa el URL de tu red social: (Ej:
-                  https://www.facebook.com/profile.php?id=123456789)
-                </DialogContentText>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="url"
-                  label="URL"
-                  type="url"
-                  fullWidth
-                  variant="standard"
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose}>Cancelar</Button>
-                <Button onClick={handleClose}>Agregar</Button>
-              </DialogActions>
-            </Dialog>
-            <Button variant="outlined" onClick={handleClickOpen}>
+
+            <Button variant="outlined" onClick={() => handleSocial('Twitter')}>
               {/* Twitter */}
               <Grid
                 item
@@ -185,34 +190,13 @@ function FormDialog() {
               </Grid>
             </Button>
 
-            <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>Agregar URL Twitter</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  Ingresa el URL de tu red social: (Ej:
-                  https://wa.me/1XXXXXXXXXX)
-                </DialogContentText>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="url"
-                  label="URL"
-                  type="url"
-                  fullWidth
-                  variant="standard"
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose}>Cancelar</Button>
-                <Button onClick={handleClose}>Agregar</Button>
-              </DialogActions>
-            </Dialog>
+
           </Grid>
 
           {/* Row three */}
           <Grid container spacing={1} columns={16} justifyContent="center">
             {/* Snapchat */}
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={() => handleSocial('Snapchat')}>
               <Grid
                 item
                 xs={8}
@@ -227,29 +211,8 @@ function FormDialog() {
               </Grid>
             </Button>
 
-            <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>Agregar URL Snapchat</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  Ingresa el URL de tu red social: (Ej:
-                  https://www.facebook.com/profile.php?id=123456789)
-                </DialogContentText>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="url"
-                  label="URL"
-                  type="url"
-                  fullWidth
-                  variant="standard"
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose}>Cancelar</Button>
-                <Button onClick={handleClose}>Agregar</Button>
-              </DialogActions>
-            </Dialog>
-            <Button variant="outlined" onClick={handleClickOpen}>
+
+            <Button variant="outlined"onClick={() => handleSocial('Tiktok')}>
               {/* Tiktok */}
               <Grid
                 item
@@ -265,54 +228,51 @@ function FormDialog() {
               </Grid>
             </Button>
 
-            <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>Agregar URL </DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  Ingresa el URL de tu red social: (Ej:
-                  https://wa.me/1XXXXXXXXXX)
-                </DialogContentText>
-                <TextField
+          </Grid>
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Agregar URL de {social}:  </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Ingresa el URL de tu red social: (Ej:
+                https://www.{social}.com/184516)
+              </DialogContentText>
+              <TextField
                   autoFocus
                   margin="dense"
-                  id="url"
+                  id={social}
                   label="URL"
                   type="url"
                   fullWidth
                   variant="standard"
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose}>Cancelar</Button>
-                <Button onClick={handleClose}>Agregar</Button>
-              </DialogActions>
-            </Dialog>
-          </Grid>
-          <div className="btn-create">
-            <Button
-              onClick={() => {
-                alert("Redes sociales agregadas");
-               
-              }}
-              variant="contained"
-            
-        
-              
-            >
-              Generar codigo QR
-            </Button>
-          </div>
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Cancelar</Button>
+              <Button onClick={handleSumbit}>Agregar</Button>
+            </DialogActions>
+          </Dialog>
+
+
         </Container>
-      </div>
     </>
   );
 }
 
 class Save extends React.Component {
+
+
   render() {
     return (
       <>
-        <FormDialog />
+        <div className="header">
+          <FormDialog />
+          <BasicModal />
+          <div className="btn-fab">
+            <Fab color="primary" aria-label="add">
+              <AddIcon />
+            </Fab>
+          </div>
+        </div>
       </>
     );
   }

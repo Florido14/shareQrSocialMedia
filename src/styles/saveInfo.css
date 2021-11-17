@@ -18,3 +18,16 @@ color: aliceblue;
 .btn-create{
   padding-top: 50px;
 }
+
+.title{
+  font-size: 20px;
+  color: aliceblue;
+  text-align: center;
+}
+
+.btn-fab{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+}
