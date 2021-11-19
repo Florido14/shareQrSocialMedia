@@ -90,7 +90,12 @@ const Item = styled(Paper)(({ theme }) => ({
 function FormDialog() {
   const [open, setOpen] = React.useState(false);
   const [social, setSocial] = useState([]);
-  //const [final, setFinal] = useState({});
+  const [final, setFinal] = useState({ Facebook: "",
+    Whatsapp: "",
+    Instagram: "",
+    Twitter: "",
+    Snapchat: "",
+    Tiktok: "",});
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -105,7 +110,7 @@ function FormDialog() {
     handleClickOpen();
   };
 
-  const objectFinal = {
+  let objectFinal = {
     Facebook: "",
     Whatsapp: "",
     Instagram: "",
@@ -115,37 +120,11 @@ function FormDialog() {
   };
 
   const handleSubmit = () => {
-    //console.log(objectFinal);
-    //Switch
-    switch (social) {
-      case "Facebook":
-        objectFinal.Facebook = { datos };
-        console.log("Facebook");
-        break;
-      case "Whatsapp":
-        objectFinal.Whatsapp = { datos };
-        console.log("Whatsapp");
-        break;
-      case "Instagram":
-        objectFinal.Instagram = "";
-        console.log("Instagram");
-        break;
-      case "Twitter":
-        objectFinal.Twitter = "gtbtb";
-        console.log("Twitter");
-        break;
-      case "Snapchat":
-        objectFinal.Snapchat = "";
-        console.log("Snapchat");
-        break;
-      case "Tiktok":
-        objectFinal.Tiktok = "";
-        console.log("Tiktok");
-        break;
-      default:
-        break;
-    }
-    console.log(objectFinal);
+    let temporal = {...final};
+    temporal[social] = "https:/jvionrionv"
+    setFinal (temporal );
+   console.log(temporal);
+    console.log(final);
     //localStorage.setItem("social", JSON.stringify(objectFinal));
     handleClose();
   };

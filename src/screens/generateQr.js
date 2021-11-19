@@ -8,7 +8,7 @@ class GenerateQr extends React.Component {
         bgColor="#FFFFFF"
         fgColor="#000000"
         level="Q"
-        style={{ width: 50 }}
+        style={{ width: 250 }}
         value={JSON.stringify({
           id: "123",
           name: "John Doe",
