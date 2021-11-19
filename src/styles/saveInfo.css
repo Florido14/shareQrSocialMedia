@@ -31,3 +31,12 @@ color: aliceblue;
   right: 20px;
   z-index: 99;
 }
+
+.img-qr{
+  width: 2vw;
+  height: 2vh;
+}
+
+.center{
+  text-align: center;
+}

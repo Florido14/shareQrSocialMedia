@@ -24,6 +24,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
+import example from "../assets/img/classic.png";
+//import GenerateQr from "./generateQr";
 
 //Start Modal
 
@@ -62,7 +64,9 @@ function BasicModal() {
             Compartelo con tus amigos:
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            <div className="center">
+              <img src={example} alt="example" />
+            </div>
           </Typography>
         </Box>
       </Modal>
@@ -86,14 +90,7 @@ const Item = styled(Paper)(({ theme }) => ({
 function FormDialog() {
   const [open, setOpen] = React.useState(false);
   const [social, setSocial] = useState([]);
-  const [final, setFinal] = useState({
-    Facebook: "https://www.facebook.com/184516",
-    Whatsapp: "https://www.whatsapp.com/184516",
-    Instagram: "https://www.instagram.com/184516",
-    Twitter: "https://www.twitter.com/184516",
-    Snapchat: "https://www.snapchat.com/184516",
-    Tiktok: "https://www.tiktok.com/184516",
-  });
+  //const [final, setFinal] = useState({});
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -108,14 +105,63 @@ function FormDialog() {
     handleClickOpen();
   };
 
-  const handleSubmit = () => {
-    const newState = [...final, social];
-    setFinal(newState);
-    //localStorage.setItem(final, 'Url ejemplo');
-    console.log(final);
-    handleClose();
+  const objectFinal = {
+    Facebook: "",
+    Whatsapp: "",
+    Instagram: "",
+    Twitter: "",
+    Snapchat: "",
+    Tiktok: "",
   };
 
+  const handleSubmit = () => {
+    //console.log(objectFinal);
+    //Switch
+    switch (social) {
+      case "Facebook":
+        objectFinal.Facebook = { datos };
+        console.log("Facebook");
+        break;
+      case "Whatsapp":
+        objectFinal.Whatsapp = { datos };
+        console.log("Whatsapp");
+        break;
+      case "Instagram":
+        objectFinal.Instagram = "";
+        console.log("Instagram");
+        break;
+      case "Twitter":
+        objectFinal.Twitter = "gtbtb";
+        console.log("Twitter");
+        break;
+      case "Snapchat":
+        objectFinal.Snapchat = "";
+        console.log("Snapchat");
+        break;
+      case "Tiktok":
+        objectFinal.Tiktok = "";
+        console.log("Tiktok");
+        break;
+      default:
+        break;
+    }
+    console.log(objectFinal);
+    //localStorage.setItem("social", JSON.stringify(objectFinal));
+    handleClose();
+  };
+  const [datos, setDatos] = useState({
+    name: "https://vjk0it jhbvt",
+  });
+
+  const handleInputChange = (event) => {
+    console.log("hola: " + event.target.name);
+    // console.log(event.target.name)
+    // console.log(event.target.value)
+    setDatos({
+      ...datos,
+      [event.target.name]: event.target.value,
+    });
+  };
   return (
     <>
       <span className="title">Oprime el icono y guarda el URL</span>
@@ -225,7 +271,12 @@ function FormDialog() {
           </Button>
         </Grid>
         <form onSubmit={handleSubmit}>
-          <Dialog open={open} onClose={handleClose} disablePortal>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            onSubmit={handleSubmit}
+            disablePortal
+          >
             <DialogTitle>Agregar URL de {social}: </DialogTitle>
             <DialogContent>
               <DialogContentText>
@@ -234,18 +285,20 @@ function FormDialog() {
               <TextField
                 autoFocus
                 margin="dense"
-                id={social}
-                label="URL"
                 fullWidth
                 variant="standard"
-                value="Ej:https://www.facebook.com/184516"
+                placeholder="Ej:https://www.facebook.com/184516"
                 type="text"
-                name={social}
+                id="name"
+                label="URL"
+                onClick={handleInputChange}
               />
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose}>Cancelar</Button>
-              <Button onClick={handleSubmit}>Agregar</Button>
+              <Button type="submit" onClick={handleSubmit}>
+                Agregar
+              </Button>
             </DialogActions>
           </Dialog>
         </form>
