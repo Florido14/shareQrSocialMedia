@@ -30,7 +30,7 @@ class Social extends React.Component {
             <div className="btn-next">
               <Button
                 onClick={() => {
-                  this.props.history.replace("save");
+                  this.props.history.push("save");
                 }}
                 variant="contained"
                 href="#contained-buttons"
@@ -44,4 +44,5 @@ class Social extends React.Component {
     );
   }
 }
+
 export default withRouter(Social);

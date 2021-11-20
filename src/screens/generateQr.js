@@ -2,6 +2,20 @@ import React from "react";
 import { QRCode } from "react-qr-svg";
 
 class GenerateQr extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: {},
+    };
+  }
+
+  componentDidMount() {
+    let data = JSON.parse(localStorage.getItem("social"));
+    console.log(data);
+    this.setState({ data: data });
+  }
+
   render() {
     return (
       <QRCode
@@ -9,14 +23,7 @@ class GenerateQr extends React.Component {
         fgColor="#000000"
         level="Q"
         style={{ width: 250 }}
-        value={JSON.stringify({
-          id: "123",
-          name: "John Doe",
-          fb: "www.facebook.com",
-          wha: "www.whatsapp.com",
-          twi: "www.instagram.com",
-          inst: "www.twitter.com",
-        })}
+        value={JSON.stringify(this.state.data)}
       />
     );
   }

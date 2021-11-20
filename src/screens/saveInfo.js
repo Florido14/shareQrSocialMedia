@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import React, {useState} from "react";
+import {withRouter} from "react-router";
 import "../styles/social.css";
-import { styled } from "@mui/material/styles";
+import {styled} from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { Container } from "@mui/material";
+import {Container} from "@mui/material";
 import "../styles/saveInfo.css";
 import fbicon from "../assets/img/facebook.png";
 import whaicon from "../assets/img/whatsapp.png";
@@ -23,10 +23,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
-import example from "../assets/img/classic.png";
-//import GenerateQr from "./generateQr";
-
+import CropFreeIcon from "@mui/icons-material/CropFree";
+import GenerateQr from "./generateQr";
+import ScanQr from "./scanQr";
 //Start Modal
 
 const style = {
@@ -45,11 +44,17 @@ function BasicModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpenModal = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  //handleOpenModal
 
   return (
     <div>
       <div className="btn-create">
-        <Button onClick={handleOpenModal} variant="contained">
+        <Button
+          onClick={() => {
+            handleOpenModal();
+          }}
+          variant="contained"
+        >
           Generar codigo QR
         </Button>
       </div>
@@ -65,7 +70,7 @@ function BasicModal() {
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <div className="center">
-              <img src={example} alt="example" />
+              <GenerateQr />
             </div>
           </Typography>
         </Box>
@@ -90,12 +95,15 @@ const Item = styled(Paper)(({ theme }) => ({
 function FormDialog() {
   const [open, setOpen] = React.useState(false);
   const [social, setSocial] = useState([]);
-  const [final, setFinal] = useState({ Facebook: "",
+  const [email, setEmail] = useState("");
+  const [final, setFinal] = useState({
+    Facebook: "",
     Whatsapp: "",
     Instagram: "",
     Twitter: "",
     Snapchat: "",
-    Tiktok: "",});
+    Tiktok: "",
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -119,13 +127,14 @@ function FormDialog() {
     Tiktok: "",
   };
 
-  const handleSubmit = () => {
-    let temporal = {...final};
-    temporal[social] = "https:/jvionrionv"
-    setFinal (temporal );
-   console.log(temporal);
-    console.log(final);
-    //localStorage.setItem("social", JSON.stringify(objectFinal));
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Email:", email);
+    let temporal = { ...final };
+    temporal[social] = email;
+    setFinal(temporal);
+    console.log(temporal);
+    localStorage.setItem("social", JSON.stringify(temporal));
     handleClose();
   };
   const [datos, setDatos] = useState({
@@ -271,6 +280,8 @@ function FormDialog() {
                 id="name"
                 label="URL"
                 onClick={handleInputChange}
+                //value={email}
+                onInput={(e) => setEmail(e.target.value)}
               />
             </DialogContent>
             <DialogActions>
@@ -286,6 +297,35 @@ function FormDialog() {
   );
 }
 
+function ModalScan() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  return (
+    <div>
+      <Fab color="primary" aria-label="add" onClick={handleOpen}>
+        <CropFreeIcon />
+      </Fab>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            <div className="center">Escanea el codigo QR de tus amigos!</div>
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <ScanQr />
+          </Typography>
+        </Box>
+      </Modal>
+    </div>
+  );
+}
+
 class Save extends React.Component {
   render() {
     return (
@@ -294,13 +334,12 @@ class Save extends React.Component {
           <FormDialog />
           <BasicModal />
           <div className="btn-fab">
-            <Fab color="primary" aria-label="add">
-              <AddIcon />
-            </Fab>
+            <ModalScan />
           </div>
         </div>
       </>
     );
   }
 }
+
 export default withRouter(Save);

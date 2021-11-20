@@ -1,34 +1,36 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import QrReader from "react-qr-reader";
+import { useHistory } from "react-router-dom";
 
-class ScanQr extends Component {
-  state = {
-    result: "No result",
-  };
+function ScanQr() {
+  const history = useHistory();
+  const [result, setResult] = useState("No result");
 
-  handleScan = (data) => {
+  async function handleScan(data) {
     if (data) {
-      this.setState({
-        result: data,
-      });
+      setResult(data);
+      console.log(data);
+      await localStorage.setItem("response", data);
+      history.push("/show");
     }
-  };
-  handleError = (err) => {
-    console.error(err);
-  };
-  render() {
-    return (
-      <div>
-        <QrReader
-          delay={300}
-          onError={this.handleError}
-          onScan={this.handleScan}
-          style={{ width: "100%" }}
-        />
-        <p>{this.state.result}</p>
-      </div>
-    );
   }
+
+  function handleError(err) {
+    console.error(err);
+  }
+
+  return (
+    <div>
+      <QrReader
+        delay={300}
+        onError={(err) => handleError(err)}
+        onScan={(data) => handleScan(data)}
+        style={{ width: "100%" }}
+        legacyMode={false}
+        facingMode="user"
+      />
+    </div>
+  );
 }
 
 export default ScanQr;
