@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/shareQrSocialMedia/static/css/main.20532a6b.chunk.css",
+    "main.js": "/shareQrSocialMedia/static/js/main.c41a1734.chunk.js",
+    "main.js.map": "/shareQrSocialMedia/static/js/main.c41a1734.chunk.js.map",
+    "runtime-main.js": "/shareQrSocialMedia/static/js/runtime-main.7d09c218.js",
+    "runtime-main.js.map": "/shareQrSocialMedia/static/js/runtime-main.7d09c218.js.map",
+    "static/js/2.33aa34f6.chunk.js": "/shareQrSocialMedia/static/js/2.33aa34f6.chunk.js",
+    "static/js/2.33aa34f6.chunk.js.map": "/shareQrSocialMedia/static/js/2.33aa34f6.chunk.js.map",
+    "static/js/3.5dd13ffd.chunk.js": "/shareQrSocialMedia/static/js/3.5dd13ffd.chunk.js",
+    "static/js/3.5dd13ffd.chunk.js.map": "/shareQrSocialMedia/static/js/3.5dd13ffd.chunk.js.map",
+    "index.html": "/shareQrSocialMedia/index.html",
+    "static/css/main.20532a6b.chunk.css.map": "/shareQrSocialMedia/static/css/main.20532a6b.chunk.css.map",
+    "static/js/2.33aa34f6.chunk.js.LICENSE.txt": "/shareQrSocialMedia/static/js/2.33aa34f6.chunk.js.LICENSE.txt",
+    "static/media/instagram.22aced98.png": "/shareQrSocialMedia/static/media/instagram.22aced98.png",
+    "static/media/snapchat.553791c2.png": "/shareQrSocialMedia/static/media/snapchat.553791c2.png",
+    "static/media/tiktok.1b220481.png": "/shareQrSocialMedia/static/media/tiktok.1b220481.png",
+    "static/media/twitter.7774029b.png": "/shareQrSocialMedia/static/media/twitter.7774029b.png",
+    "static/media/welcome.913a3295.svg": "/shareQrSocialMedia/static/media/welcome.913a3295.svg",
+    "static/media/whatsapp.c826b016.png": "/shareQrSocialMedia/static/media/whatsapp.c826b016.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7d09c218.js",
+    "static/js/2.33aa34f6.chunk.js",
+    "static/css/main.20532a6b.chunk.css",
+    "static/js/main.c41a1734.chunk.js"
+  ]
+}
