@@ -27,7 +27,7 @@ function ScanQr() {
         onScan={(data) => handleScan(data)}
         style={{ width: "100%" }}
         legacyMode={false}
-        facingMode="user"
+        facingMode="environment"
       />
     </div>
   );
