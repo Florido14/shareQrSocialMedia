@@ -6,3 +6,6 @@ The objective of this project is to share your social networks through a qr code
 11/20/2021
 Hours: 15hrs
 
+## Demo (is adapted from mobile)
+https://florido14.github.io/shareQrSocialMedia/
+
