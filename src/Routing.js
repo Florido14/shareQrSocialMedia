@@ -12,7 +12,7 @@ import Show from "./screens/showSocial";
 
 function Routes() {
   return (
-    <Router>
+    <Router basename="/shareQrSocialMedia">
       <Switch>
         <Route exact path="/" children={<Social />} />
         <Route path="/save" children={<Save />} />
