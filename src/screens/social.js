@@ -33,7 +33,7 @@ class Social extends React.Component {
                   this.props.history.push("save");
                 }}
                 variant="contained"
-                href="#contained-buttons"
+                href="mailto:elcorreoquequieres@correo.com"
               >
                 Continuar
               </Button>
